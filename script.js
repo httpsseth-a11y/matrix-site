@@ -1,29 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Seções
+  // Sections
   const home = document.getElementById("home");
   const gallery = document.getElementById("gallery");
   const about = document.getElementById("about");
 
-  // Delegação de eventos para o menu
+  // Menu handler
   document.body.addEventListener("click", (e) => {
     if (e.target.matches("#link-home")) {
       home.classList.remove("hidden");
       gallery.classList.add("hidden");
       about.classList.add("hidden");
-    } 
-    else if (e.target.matches("#link-gallery")) {
+    } else if (e.target.matches("#link-gallery")) {
       home.classList.add("hidden");
       gallery.classList.remove("hidden");
       about.classList.add("hidden");
-    } 
-    else if (e.target.matches("#link-about")) {
+    } else if (e.target.matches("#link-about")) {
       home.classList.add("hidden");
       gallery.classList.add("hidden");
       about.classList.remove("hidden");
     }
   });
 
-  // Canvas Matrix
+  // Matrix canvas
   const canvas = document.getElementById("matrix-canvas");
   const ctx = canvas.getContext("2d");
   canvas.width = innerWidth;
@@ -35,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const drops = Array(Math.floor(columns)).fill(1);
 
   function drawMatrix() {
-    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillStyle = "rgba(0,0,0,0.05)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#0F0";
     ctx.font = fontSize + "px monospace";
@@ -47,13 +45,12 @@ document.addEventListener("DOMContentLoaded", () => {
       drops[i]++;
     }
   }
-
   setInterval(drawMatrix, 35);
 
   // Player
   const playBtn = document.querySelector(".play");
   const audio = new Audio(
-    "https://files.catbox.moe/0nuf9m.mp3"
+    "https://www.dropbox.com/scl/fi/f1jjoo8xvhkp2ugoeenb6/Daydreamin-feat.-Jill-Scott-C0rcii5DCms.mp3?raw=1"
   );
   let playing = false;
 
