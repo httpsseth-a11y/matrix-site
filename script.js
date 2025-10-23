@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     requestAnimationFrame(draw);
   }
-
   requestAnimationFrame(draw);
   window.addEventListener("resize", () => {
     width = canvas.width = window.innerWidth;
@@ -70,12 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// MODAL DE IMAGEM
+// MODAL + FECHAR ABOUT/GALLERY
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal");
   const modalImg = document.getElementById("modal-img");
-  const closeBtn = document.querySelector(".close");
+  const closeModal = document.querySelector(".close");
   const imgs = document.querySelectorAll(".gallery img");
+  const closeGallery = document.querySelector(".close-gallery");
+  const closeAbout = document.querySelector(".close-about");
   const sections = document.querySelectorAll("section");
 
   imgs.forEach(img => {
@@ -85,19 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  closeBtn.addEventListener("click", () => {
+  function goHome() {
     modal.classList.add("hidden");
-    // volta automaticamente para home
     sections.forEach(sec => sec.classList.add("hidden"));
     document.querySelector("#home").classList.remove("hidden");
-  });
+  }
 
-  // fecha clicando fora da imagem
-  modal.addEventListener("click", e => {
-    if (e.target === modal) {
-      modal.classList.add("hidden");
-      sections.forEach(sec => sec.classList.add("hidden"));
-      document.querySelector("#home").classList.remove("hidden");
-    }
-  });
+  closeModal.addEventListener("click", goHome);
+  modal.addEventListener("click", e => { if (e.target === modal) goHome(); });
+  closeGallery.addEventListener("click", goHome);
+  closeAbout.addEventListener("click", goHome);
 });
