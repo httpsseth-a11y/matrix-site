@@ -76,16 +76,16 @@ const nowTitle = document.getElementById('nowTitle');
 const nowArtist = document.getElementById('nowArtist');
 const playlistList = document.getElementById('playlistList');
 
-/* === MÚSICAS === */
+/* === MÚSICAS (Google Drive links) === */
 const tracks = [
-  { title: "Daydreamin' (feat. Jill Scott)", artist: "Lupe Fiasco", src: "https://www.dropbox.com/scl/fi/f1jjoo8xvhkp2ugoeenb6/Daydreamin-feat.-Jill-Scott-C0rcii5DCms.mp3?raw=1" },
-  { title: "Fed Up", artist: "UXlJgVmqFXw", src: "https://www.dropbox.com/scl/fi/rl6lu43744alkmoclhw70/Fed-Up-UXlJgVmqFXw.mp3?raw=1" },
-  { title: "Mercury", artist: "GHOSTEMANE", src: "https://www.dropbox.com/scl/fi/rgnqyofwbte4z5bxrxrgm/GHOSTEMANE-Mercury-31j4DIpgY9U.mp3?raw=1" },
-  { title: "Ultimate Summoning Booster", artist: "Unknown Artist", src: "https://www.dropbox.com/scl/fi/ik8iy5aidq01bflc82rxh/Ultimate-Summoning-Booster-ws2CuQ3PGxY.mp3?raw=1" },
-  { title: "Adagio", artist: "Zhasulan Sydykov", src: "https://www.dropbox.com/scl/fi/3wqgcno6xxs23tvl5c700/Adagio-by-Zhasulan-Sydykov-Zhasulan-Sydykov-youtube.mp3?raw=1" },
-  { title: "Voilà", artist: "Barbara Pravi", src: "https://www.dropbox.com/scl/fi/bwufqejqq1xbaiqb64egl/Barbara-Pravi-Voil-Paroles_Lyrics-Creative-Chaos-youtube.mp3?raw=1" },
-  { title: "Il Mondo", artist: "Jimmy Fontana", src: "https://www.dropbox.com/scl/fi/l11mn5m1yb6iqwfzpy08v/Jimmy-Fontana-Il-Mondo-Legendas-IT-PT-BR-Magyart-HD-Videos-youtube.mp3?raw=1" },
-  { title: "My Way (2008 Remastered)", artist: "Frank Sinatra", src: "https://www.dropbox.com/scl/fi/zqii1wyov2umq39q2v36g/My-Way-2008-Remastered-Frank-Sinatra-youtube.mp3?raw=1" }
+  { title: "Daydreamin' (feat. Jill Scott)", artist: "Lupe Fiasco", src: "https://drive.google.com/uc?export=download&id=1k15BmTdxfsJMoFEX2gPv0o0l182MIbZF" },
+  { title: "Fed Up", artist: "UXlJgVmqFXw", src: "https://drive.google.com/uc?export=download&id=15om_jcelushHWcwpGpeTlk62kml_wyAe" },
+  { title: "Mercury", artist: "GHOSTEMANE", src: "https://drive.google.com/uc?export=download&id=1RkRnIo1k4xxdAuZKsP8GHvepHyY9mwHl" },
+  { title: "Ultimate Summoning Booster", artist: "Unknown Artist", src: "https://drive.google.com/uc?export=download&id=11uF-61lLV-J8dds22v8PBsKKxlkuZ4sR" },
+  { title: "Adagio", artist: "Zhasulan Sydykov", src: "https://drive.google.com/uc?export=download&id=1r74dJQdoueeZL6TFOKiGpwouGYNlXVZg" },
+  { title: "Voilà", artist: "Barbara Pravi", src: "https://drive.google.com/uc?export=download&id=1Qe0v_f4zf_9qK1baMoYCgArqQioKXLcr" },
+  { title: "Il Mondo", artist: "Jimmy Fontana", src: "https://drive.google.com/uc?export=download&id=1HdipaqFKTvf1Ivq6e1XyMdwtytv9wX4g" },
+  { title: "My Way (2008 Remastered)", artist: "Frank Sinatra", src: "https://drive.google.com/uc?export=download&id=1uD4I7PF2JMcTt9Pp0Pdq91EQSojhTM4B" }
 ];
 
 let currentIndex = -1;
@@ -131,9 +131,7 @@ function loadTrack(i) {
 }
 
 function playTrack() {
-  if (!audio.src) {
-    loadTrack(0);
-  }
+  if (!audio.src) loadTrack(0);
   audio.play().then(() => {
     isPlaying = true;
     playPauseBtn.textContent = '⏸';
@@ -174,9 +172,7 @@ audio.addEventListener('timeupdate', () => {
   }
 });
 
-audio.addEventListener('ended', () => {
-  nextBtn.click();
-});
+audio.addEventListener('ended', () => nextBtn.click());
 
 progressBar.addEventListener('click', e => {
   if (!audio.duration) return;
