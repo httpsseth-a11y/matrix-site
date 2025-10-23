@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalImg = document.getElementById("modal-img");
   const closeBtn = document.querySelector(".close");
   const imgs = document.querySelectorAll(".gallery img");
+  const sections = document.querySelectorAll("section");
 
   imgs.forEach(img => {
     img.addEventListener("click", () => {
@@ -87,9 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   closeBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
+    // Volta para Home automaticamente
+    sections.forEach(sec => sec.classList.add("hidden"));
+    document.querySelector("#home").classList.remove("hidden");
   });
 
   modal.addEventListener("click", e => {
-    if (e.target === modal) modal.classList.add("hidden");
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+      sections.forEach(sec => sec.classList.add("hidden"));
+      document.querySelector("#home").classList.remove("hidden");
+    }
   });
 });
