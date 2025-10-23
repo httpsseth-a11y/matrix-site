@@ -1,56 +1,43 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Xatspace Matrix</title>
+  <title>Hack the World — Rewrite the Rules</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <canvas id="matrix"></canvas>
 
-  <div class="content">
-    <h1 class="username">SETH</h1>
+  <div class="center-box">
+    <h1>Hack the world — rewrite the rules.</h1>
+    <p class="subtext">SMuhaEmmadTH (1537728773)</p>
 
     <nav class="menu">
-      <button data-section="home">Home</button>
-      <button data-section="gallery">Gallery</button>
-      <button data-section="about">Friends</button>
+      <a href="#" onclick="showSection('home')">Home</a>
+      <a href="#" onclick="showSection('gallery')">Gallery</a>
+      <a href="#" onclick="showSection('about')">About</a>
     </nav>
-
-    <section id="home" class="section active">
-      <div class="box">
-        <p>Welcome to my world — The Matrix within.</p>
-      </div>
-    </section>
-
-    <section id="gallery" class="gallery hidden">
-      <div class="card"><img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art"></div>
-      <div class="card"><img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art"></div>
-    </section>
-
-    <section id="about" class="section hidden">
-      <div class="box">
-        <h2>Friends</h2>
-        <ul class="friends">
-          <li><img src="https://i.ibb.co/p2PMhMZ/friend1.jpg" alt=""> <span>@NeoX</span></li>
-          <li><img src="https://i.ibb.co/ZSMp3yc/friend2.jpg" alt=""> <span>@TrinityX</span></li>
-          <li><img src="https://i.ibb.co/G0BzK3S/friend3.jpg" alt=""> <span>@MorpheusX</span></li>
-        </ul>
-      </div>
-    </section>
   </div>
 
-  <div id="lightbox" class="hidden">
-    <img id="lightbox-img" src="" alt="expanded">
-    <button id="close-lightbox">X</button>
-  </div>
+  <!-- Seções -->
+  <section id="home" class="section active"></section>
+
+  <section id="gallery" class="section hidden">
+    <div class="card"><img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art"></div>
+    <div class="card"><img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art"></div>
+  </section>
+
+  <section id="about" class="section hidden">
+    <h2>About Me</h2>
+    <p>Welcome to my xatspace. Hack the world — rewrite the rules.</p>
+  </section>
 
   <script src="script.js"></script>
 </body>
