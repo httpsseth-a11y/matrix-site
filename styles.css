@@ -140,3 +140,21 @@ nav.menu a:hover{color:#9aff9a;transform:translateY(-3px) scale(1.03);text-shado
 }
 
 
+/* Scrollbar personalizada estilo Matrix */
+::-webkit-scrollbar {
+  width: 10px; /* largura da barra */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.8); /* fundo escuro */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff00; /* verde Matrix */
+  border-radius: 10px;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00cc00; /* verde mais escuro ao passar o mouse */
+}
