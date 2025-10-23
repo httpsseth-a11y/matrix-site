@@ -1,11 +1,10 @@
 // MATRIX BACKGROUND
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("matrix-canvas");
-  if (!canvas) return;
   const ctx = canvas.getContext("2d");
   let width = (canvas.width = window.innerWidth);
   let height = (canvas.height = window.innerHeight);
-  const chars = "アァカサタナハマヤャラワン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const chars = "アァカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const fontSize = 14;
   const columns = Math.floor(width / fontSize);
   const drops = Array(columns).fill(1);
@@ -88,11 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   closeBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
-    // Volta para Home automaticamente
+    // volta automaticamente para home
     sections.forEach(sec => sec.classList.add("hidden"));
     document.querySelector("#home").classList.remove("hidden");
   });
 
+  // fecha clicando fora da imagem
   modal.addEventListener("click", e => {
     if (e.target === modal) {
       modal.classList.add("hidden");
