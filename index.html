@@ -64,17 +64,26 @@
             <button class="btn" id="playPauseBtn">▶</button>
             <button class="btn" id="nextBtn">⏭</button>
           </div>
+        
           <div class="track-info">
             <div class="track-title" id="nowTitle">—</div>
             <div class="track-artist" id="nowArtist">—</div>
             <div class="progress" id="progressBar"><div class="bar" id="progressFill"></div></div>
             <div class="time-row"><div id="timeCurrent">0:00</div><div id="timeTotal">0:00</div></div>
           </div>
+<!-- Controle de volume -->
+<div class="volume-container">
+  <button id="muteBtn" class="volume-label">
+    <span id="muteIcon"></span>
+  </button>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+</div>
+
         </div>
         <div class="playlist-list" id="playlistList"></div>
       </div>
       <div class="section-close">
-        <button id="playlistClose" class="close-btn">✕ Close</button>
+        <button id="playlistClose" class="close-btn">✕</button>
       </div>
     </section>
   </main>
