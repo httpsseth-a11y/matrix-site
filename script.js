@@ -82,7 +82,7 @@ const tracks = [
   { title: "Fed Up", artist: "UXlJgVmqFXw", src: "musicas/fedup.mp3" },
   { title: "Mercury", artist: "GHOSTEMANE", src: "musicas/mercury.mp3" },
   { title: "Ultimate Summoning Booster", artist: "Unknown Artist", src: "musicas/ultimate.mp3" },
-  { title: "Adagio", artist: "Zhasulan Sydykov", src: "musicas/adagio.mp3" },
+  { title: "Adagio", artist: "Zhasulan Sydykov", src: "musicas/Adagio.mp3" },
   { title: "Voilà", artist: "Barbara Pravi", src: "musicas/voila.mp3" },
   { title: "Il Mondo", artist: "Jimmy Fontana", src: "musicas/ilmondo.mp3" },
   { title: "My Way (2008 Remastered)", artist: "Frank Sinatra", src: "musicas/myway.mp3" }
