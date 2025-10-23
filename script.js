@@ -1,95 +1,58 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
-  color: #00ff9f;
-  font-family: 'Courier New', monospace;
-}
+// Matrix efeito
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
-}
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-.center-box {
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #b8ffd2;
-  background: rgba(0, 0, 0, 0.4);
-  padding: 40px 60px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px #00ff9f55;
-  z-index: 1;
-}
+const letters = "01";
+const fontSize = 16;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
 
-h1 {
-  font-size: 1.8em;
-  margin-bottom: 10px;
-}
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-.subtext {
-  font-size: 0.9em;
-  margin-bottom: 25px;
-  color: #7cffb3;
-}
+  ctx.fillStyle = "#0F0";
+  ctx.font = fontSize + "px monospace";
 
-.menu a {
-  color: #00ff9f;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: 0.3s;
-}
+  drops.forEach((y, i) => {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    const x = i * fontSize;
+    ctx.fillText(text, x, y * fontSize);
 
-.menu a:hover {
-  text-shadow: 0 0 10px #00ff9f, 0 0 20px #00ff9f;
+    if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  });
 }
+setInterval(drawMatrix, 35);
 
-/* GALLERY */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  padding: 80px 20px;
-  z-index: 1;
-  position: relative;
-}
+// MENU navegação
+const buttons = document.querySelectorAll(".menu button");
+const sections = document.querySelectorAll(".section, .gallery");
 
-.card {
-  width: 220px;
-  height: 220px;
-  overflow: hidden;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #00ff9f77;
-  transition: all 0.3s ease;
-}
+buttons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    sections.forEach(sec => sec.classList.add("hidden"));
+    document.getElementById(btn.dataset.section).classList.remove("hidden");
+    document.getElementById(btn.dataset.section).classList.add("active");
+  });
+});
 
-.card:hover {
-  box-shadow: 0 0 25px #00ff9f;
-  transform: scale(1.05);
-}
+// GALERIA
+const cards = document.querySelectorAll(".card img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const closeBtn = document.getElementById("close-lightbox");
 
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+cards.forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.classList.remove("hidden");
+    lightboxImg.src = img.src;
+  });
+});
 
-/* Sections */
-.section {
-  display: none;
-}
-
-.section.active {
-  display: block;
-}
-
-.hidden {
-  display: none;
-}
+closeBtn.addEventListener("click", () => {
+  lightbox.classList.add("hidden");
+});
