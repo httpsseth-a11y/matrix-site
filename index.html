@@ -1,77 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matrix Space — Seth</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix Space</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: black;
+  color: #00ff9d;
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+}
+
+/* Fundo Matrix */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Caixa central com frase */
+.center-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px 60px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px #00ff9d;
+}
+
+h1 {
+  font-size: 28px;
+  text-shadow: 0 0 15px #00ff9d;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  margin-top: 0;
+  color: #00ffaa;
+}
+
+/* Menu */
+nav {
+  margin-top: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #00ffaa;
+  margin: 0 10px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #fff;
+  text-shadow: 0 0 10px #00ff9d;
+}
+
+/* Galeria */
+#gallery {
+  display: none;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  padding: 40px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.gallery-container img {
+  width: 100%;
+  border-radius: 10px;
+  border: 2px solid #00ff9d;
+  box-shadow: 0 0 20px #00ff9d;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-container img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 30px #00ffaa, 0 0 50px #00ff9d;
+}
+
+/* Lightbox */
+#lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 40px #00ff9d;
+}
+
+#lightbox span {
+  position: absolute;
+  bottom: 20px;
+  font-size: 20px;
+  color: #00ffaa;
+  cursor: pointer;
+  text-shadow: 0 0 10px #00ff9d;
+}
+
+/* About */
+#about {
+  display: none;
+  text-align: center;
+  padding: 80px;
+  color: #00ffaa;
+}
+
+#about h2 {
+  font-size: 24px;
+  text-shadow: 0 0 15px #00ff9d;
+}
+
+#about p {
+  font-size: 14px;
+  max-width: 600px;
+  margin: 20px auto;
+  line-height: 1.6;
+}
+
+/* Player */
+.player {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  border-radius: 15px;
+  padding: 10px 20px;
+  box-shadow: 0 0 20px #00ff9d;
+  font-size: 12px;
+  color: #00ffaa;
+}
+</style>
 </head>
 <body>
-  <!-- MATRIX BACKGROUND -->
-  <canvas id="matrix-canvas"></canvas>
 
-  <main>
-    <!-- HOME -->
-    <section id="home" class="home">
-      <div class="home-inner">
-        <h1 class="home-title">Hack the world — rewrite the rules.</h1>
-        <p class="home-sub">Welcome to the system</p>
+<canvas id="matrix"></canvas>
 
-        <!-- MENU ABAIXO DO NOME -->
-        <nav class="nav-center">
-          <ul>
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#about">About</a></li>
-          </ul>
-        </nav>
-      </div>
-    </section>
+<div class="center-box" id="home">
+  <h1>Hack the world — rewrite the rules.</h1>
+  <p>Welcome to the system</p>
+  <nav>
+    <a href="#" onclick="showPage('home')">HOME</a>
+    <a href="#" onclick="showPage('gallery')">GALLERY</a>
+    <a href="#" onclick="showPage('about')">ABOUT</a>
+  </nav>
+</div>
 
-    <!-- GALLERY -->
-    <section id="gallery" class="gallery hidden">
-      <h2>Gallery</h2>
-      <div class="gallery-scroll">
-        <img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art">
-        <img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art">
-        <img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art">
-        <img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art">
-        <img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art">
-        <img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art">
-        <img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art">
-        <img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art">
-      </div>
-      <div class="close-bottom">
-        <span class="close-gallery">✖</span>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about" class="about hidden">
-      <div class="about-inner">
-        <h2>About Me</h2>
-        <p>
-          Hello! I'm a graduate in Information Systems and Technical Support.
-          I provide account recovery and digital services.
-          If you're interested, feel free to get in touch.
-        </p>
-      </div>
-      <div class="close-bottom">
-        <span class="close-about">✖</span>
-      </div>
-    </section>
-  </main>
-
-  <!-- PLAYER -->
-  <div class="player">
-    <button id="play">▶</button>
-    <div class="track-info">
-      <strong>Daydreamin'</strong>
-      <span>Lupe Fiasco — Food & Liquor</span>
-    </div>
-    <audio id="music" src="daydreamin.mp3"></audio>
+<section id="gallery">
+  <div class="gallery-container">
+    <img src="https://i.imgur.com/pvVzsvQ.png">
+    <img src="https://i.imgur.com/YXEX6bJ.jpeg">
+    <img src="https://i.imgur.com/fOaMhlK.jpeg">
+    <img src="https://i.imgur.com/RJk0oDG.jpeg">
+    <img src="https://i.imgur.com/ZgfbrYO.jpeg">
+    <img src="https://i.imgur.com/2fVLBze.jpeg">
   </div>
+</section>
 
-  <script src="script.js"></script>
+<section id="about">
+  <h2>About Me</h2>
+  <p>
+    I’m a Systems Information graduate and IT Support professional.  
+    If you’re interested in account recovery or other services, feel free to contact me.  
+  </p>
+</section>
+
+<div id="lightbox">
+  <img src="">
+  <span onclick="closeLightbox()">✕</span>
+</div>
+
+<div class="player">
+  ▶ Daydreamin' — Lupe Fiasco ft. Jill Scott
+</div>
+
+<script>
+// Efeito Matrix
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+
+const letters = '01あかさたなはまやらわがざだばぱABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+
+function draw() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00ff9d';
+  ctx.font = fontSize + 'px monospace';
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(draw, 33);
+
+// Navegação
+function showPage(page) {
+  document.getElementById('home').style.display = 'none';
+  document.getElementById('gallery').style.display = 'none';
+  document.getElementById('about').style.display = 'none';
+  document.getElementById(page).style.display = 'block';
+}
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+
+document.querySelectorAll('.gallery-container img').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.style.display = 'flex';
+  });
+});
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+}
+
+</script>
 </body>
 </html>
