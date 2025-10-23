@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SETH — Matrix Site</title>
+  <title>Matrix Space — Seth</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- MATRIX BACKGROUND -->
   <canvas id="matrix-canvas"></canvas>
 
   <main>
@@ -14,12 +15,12 @@
     <section id="home" class="home">
       <div class="home-inner">
         <h1 class="home-title">Hack the world — rewrite the rules.</h1>
-        <p class="home-sub">SMuhaEmmadTH (1537728773)</p>
+        <p class="home-sub">Welcome to the system</p>
 
-        <!-- MENU CENTRALIZADO ABAIXO DO NOME -->
+        <!-- MENU ABAIXO DO NOME -->
         <nav class="nav-center">
           <ul>
-            <li><a href="#home">Home</a></li>
+            <li><a href="#home" class="active">Home</a></li>
             <li><a href="#gallery">Gallery</a></li>
             <li><a href="#about">About</a></li>
           </ul>
@@ -29,17 +30,17 @@
 
     <!-- GALLERY -->
     <section id="gallery" class="gallery hidden">
-      <div class="gallery-grid">
-        <div class="card"><img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art"></div>
-        <div class="card"><img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art"></div>
+      <h2>Gallery</h2>
+      <div class="gallery-scroll">
+        <img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art">
+        <img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art">
+        <img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art">
+        <img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art">
+        <img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art">
+        <img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art">
+        <img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art">
+        <img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art">
       </div>
-
       <div class="close-bottom">
         <span class="close-gallery">✖</span>
       </div>
@@ -50,13 +51,11 @@
       <div class="about-inner">
         <h2>About Me</h2>
         <p>
-          Hello! I'm a graduate in Information Systems and Technical Support,
-          currently pursuing a postgraduate degree in Information Security.
-          I can recover accounts and provide various remote digital services.
-          If you're interested in my services or need assistance, feel free to get in touch!
+          Hello! I'm a graduate in Information Systems and Technical Support.
+          I provide account recovery and digital services.
+          If you're interested, feel free to get in touch.
         </p>
       </div>
-
       <div class="close-bottom">
         <span class="close-about">✖</span>
       </div>
@@ -65,17 +64,12 @@
 
   <!-- PLAYER -->
   <div class="player">
-    <button class="play">▶</button>
+    <button id="play">▶</button>
     <div class="track-info">
       <strong>Daydreamin'</strong>
-      <span class="sub">Lupe Fiasco — Food & Liquor</span>
+      <span>Lupe Fiasco — Food & Liquor</span>
     </div>
-  </div>
-
-  <!-- MODAL IMAGENS -->
-  <div id="modal" class="modal hidden">
-    <span class="close">✖</span>
-    <img id="modal-img" class="modal-content" />
+    <audio id="music" src="daydreamin.mp3"></audio>
   </div>
 
   <script src="script.js"></script>
