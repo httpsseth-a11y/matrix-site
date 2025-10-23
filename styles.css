@@ -1,160 +1,65 @@
-body {
-  margin: 0;
-  overflow: hidden;
-  background: black;
-  color: #0f0;
-  font-family: "Courier New", monospace;
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; background: black; color: #00ff90; font-family: monospace; overflow: hidden; }
+
+canvas { position: fixed; top: 0; left: 0; z-index: 0; width: 100%; height: 100%; }
+
+/* NAV MENU */
+.nav-center {
+  position: fixed; top: 15px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.5);
+  padding: 10px 25px; border-radius: 12px;
+  border: 1px solid rgba(0,255,100,0.2);
+  z-index: 10;
+}
+.nav-center ul { display: flex; gap: 25px; list-style: none; }
+.nav-center a {
+  color: #00ff90; text-decoration: none; font-weight: 600;
+  transition: 0.3s ease; position: relative;
+}
+.nav-center a:hover, .nav-center a.active {
+  color: #bfffbf; text-shadow: 0 0 8px #00ff90;
 }
 
-#matrix {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+/* PANELS */
+main { position: relative; z-index: 2; text-align: center; padding-top: 100px; }
+.panel { display: none; }
+.panel:not(.hide) { display: block; animation: fadeIn 0.6s ease; }
+
+.home-title { font-size: 26px; margin-bottom: 10px; }
+.home-sub { font-size: 14px; opacity: 0.7; }
+
+/* GALLERY */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+  gap: 10px; padding: 40px;
+}
+.gallery-grid img {
+  width: 100%; border-radius: 8px;
+  transition: 0.3s ease; cursor: pointer;
+  border: 1px solid rgba(0,255,100,0.1);
+}
+.gallery-grid img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0,255,100,0.4);
 }
 
-.content {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding-top: 60px;
+/* PLAYER */
+.player {
+  position: fixed; bottom: 15px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.6);
+  padding: 8px 15px; border-radius: 10px;
+  border: 1px solid rgba(0,255,100,0.2);
+  display: flex; align-items: center; gap: 10px;
+  z-index: 10;
 }
+.player button {
+  background: none; border: none; color: #00ff90;
+  font-size: 18px; cursor: pointer;
+}
+.player .track-info { font-size: 13px; display: flex; flex-direction: column; align-items: flex-start; }
 
-.username {
-  font-size: 2.5em;
-  color: #0f0;
-  margin-bottom: 10px;
-  text-shadow: 0 0 15px #0f0;
-}
-
-.menu {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.menu button {
-  background: transparent;
-  border: 1px solid #0f0;
-  color: #0f0;
-  padding: 8px 16px;
-  cursor: pointer;
-  transition: 0.3s;
-  border-radius: 5px;
-}
-
-.menu button:hover {
-  background: #0f0;
-  color: black;
-}
-
-.section {
-  display: none;
-}
-
-.section.active {
-  display: block;
-}
-
-.box {
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid #0f0;
-  padding: 20px;
-  margin: auto;
-  width: 60%;
-  border-radius: 10px;
-  text-shadow: 0 0 10px #0f0;
-}
-
-/* GALERIA */
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  padding: 20px;
-  overflow-y: auto;
-  height: 70vh;
-}
-
-.card {
-  width: 160px;
-  height: 160px;
-  border: 2px solid #0f0;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  box-shadow: 0 0 15px #0f0;
-}
-
-.card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.card:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px #0f0;
-}
-
-/* LIGHTBOX */
-#lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-#lightbox.hidden {
-  display: none;
-}
-
-#lightbox img {
-  max-width: 80%;
-  max-height: 80%;
-  border: 3px solid #0f0;
-  box-shadow: 0 0 25px #0f0;
-  border-radius: 10px;
-}
-
-#close-lightbox {
-  position: absolute;
-  bottom: 30px;
-  background: transparent;
-  color: #0f0;
-  border: 1px solid #0f0;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-/* FRIENDS */
-.friends {
-  list-style: none;
-  padding: 0;
-}
-
-.friends li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.friends img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2px solid #0f0;
-}
+/* ANIMATION */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
