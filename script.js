@@ -1,40 +1,193 @@
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;font-family:Inter,system-ui,'Segoe UI',Roboto,Arial;background:#000;color:#b8f08a}
-#matrix-canvas{position:fixed;inset:0;z-index:0}
-main{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px}
-.hidden{display:none!important}
-.card{width:100%;max-width:980px;background:rgba(0,0,0,0.45);border-radius:12px;border:1px solid rgba(40,100,40,0.14);padding:28px;text-align:center;box-shadow:0 6px 30px rgba(0,255,120,0.05);margin:12px}
-.title{font-size:42px;font-weight:400;color:#9aff9a;text-shadow:0 0 6px rgba(154,255,154,0.85),0 0 14px rgba(0,255,120,0.28)}
-.subtitle{font-size:16px;color:#dfffdc;margin-top:8px;text-shadow:0 0 4px rgba(154,255,154,0.7)}
-nav.menu{display:flex;justify-content:center;gap:14px;margin-top:18px;flex-wrap:wrap}
-nav.menu a{text-decoration:none;color:#b8f08a;padding:8px 12px;border-radius:8px;font-weight:700;background:rgba(0,0,0,0.08);border:1px solid rgba(60,180,80,0.06);transition:all .16s}
-nav.menu a:hover{color:#9aff9a;transform:translateY(-3px) scale(1.03);text-shadow:0 0 8px rgba(154,255,154,0.95)}
-.gallery-scroll{max-height:62vh;overflow-y:auto;padding:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;border-radius:12px;border:1px solid rgba(40,100,40,0.14);background:rgba(0,0,0,0.38)}
-.card-thumb img{width:100%;height:160px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid rgba(0,255,100,0.6);box-shadow:0 0 12px rgba(0,255,100,0.25);transition:transform .25s}
-.card-thumb img:hover{transform:scale(1.03)}
-.section-close{display:flex;justify-content:center;margin-top:12px}
-.close-btn{background:transparent;border:2px solid rgba(0,255,100,0.25);color:#b8f08a;padding:8px 14px;border-radius:8px;cursor:pointer;font-weight:800;font-size:16px}
-.close-btn:hover{transform:translateY(-2px)}
-.modal{display:flex;align-items:center;justify-content:center;position:fixed;z-index:40;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(4px)}
-.modal img{max-width:92%;max-height:82%;border-radius:10px;box-shadow:0 0 40px rgba(0,255,100,0.45)}
-.modal .close-btm{position:absolute;bottom:36px;font-size:28px;color:#b8f08a;cursor:pointer}
-.about-inner{max-width:720px;margin:0 auto;color:#9ed9a0;text-align:left;line-height:1.6}
-.about-inner h2{color:#dfffdc;margin-bottom:10px}
-.player-wrap{width:100%;max-width:780px;display:flex;flex-direction:column;align-items:center;gap:14px;margin:0 auto}
-.player-ui{width:100%;display:flex;align-items:center;gap:12px;justify-content:center;padding:12px 16px;border-radius:10px;background:rgba(0,0,0,0.28);border:1px solid rgba(60,180,80,0.06)}
-.controls{display:flex;gap:10px;align-items:center}
-.btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(0,0,0,0.12);border:1px solid rgba(60,180,80,0.14);color:#b8f08a;cursor:pointer;font-weight:800;transition:all .15s}
-.btn:hover{color:#9aff9a;transform:translateY(-4px) scale(1.06);text-shadow:0 0 8px rgba(154,255,154,0.9)}
-.track-info{text-align:center;min-width:240px}
-.track-title{font-weight:700;color:#dfffdc;font-size:15px}
-.track-artist{font-size:13px;color:#9ed9a0;opacity:0.9}
-.progress{width:100%;height:8px;background:rgba(255,255,255,0.03);border-radius:6px;overflow:hidden;margin-top:6px;cursor:pointer}
-.progress>.bar{height:100%;width:0%;background:linear-gradient(90deg,rgba(0,255,120,0.5),rgba(0,255,120,0.85))}
-.time-row{display:flex;justify-content:space-between;width:100%;font-size:12px;color:#9ed9a0;margin-top:6px}
-.playlist-list{width:100%;max-height:260px;overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:8px;border-radius:10px;background:rgba(0,0,0,0.18);border:1px solid rgba(40,100,40,0.06)}
-.playlist-item{display:flex;gap:12px;align-items:center;padding:10px;border-radius:8px;cursor:pointer;transition:all .12s;border:1px solid transparent}
-.playlist-item:hover{transform:translateX(6px);background:rgba(0,255,120,0.03);border-color:rgba(0,255,120,0.06)}
-.playlist-item.active{background:linear-gradient(90deg,rgba(0,255,120,0.06),rgba(0,255,120,0.03));border-color:rgba(0,255,120,0.12)}
-.pli-index{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.12);color:#b8f08a;font-weight:800;border:1px solid rgba(60,180,80,0.06)}
-.pli-title{color:#dfffdc;font-weight:700;font-size:14px}
-.pli-sub{color:#9ed9a0;font-size:12px;opacity:0.9;margin-top:2px}
+/* ========== MATRIX BACKGROUND ========== */
+const canvas = document.getElementById('matrix-canvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const letters = 'アァカサタナハマヤラワ0123456789'.split('');
+const fontSize = 14;
+let columns = Math.floor(canvas.width / fontSize);
+let drops = Array(columns).fill(1);
+
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(0,0,0,0.06)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00ff55';
+  ctx.font = fontSize + 'px monospace';
+  for (let i = 0; i < drops.length; i++) {
+    const ch = letters[Math.floor(Math.random() * letters.length)];
+    ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+    drops[i]++;
+  }
+}
+setInterval(drawMatrix, 35);
+
+/* ========== SECTION NAVIGATION ========== */
+const home = document.getElementById('home');
+const gallery = document.getElementById('gallery');
+const about = document.getElementById('about');
+const playlists = document.getElementById('playlists');
+
+function showSection(section) {
+  [home, gallery, about, playlists].forEach(s => s.classList.add('hidden'));
+  section.classList.remove('hidden');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('link-home').addEventListener('click', e => { e.preventDefault(); showSection(home); });
+document.getElementById('link-gallery').addEventListener('click', e => { e.preventDefault(); showSection(gallery); });
+document.getElementById('link-about').addEventListener('click', e => { e.preventDefault(); showSection(about); });
+document.getElementById('link-playlists').addEventListener('click', e => { e.preventDefault(); showSection(playlists); });
+
+document.getElementById('galleryClose').addEventListener('click', () => showSection(home));
+document.getElementById('aboutClose').addEventListener('click', () => showSection(home));
+document.getElementById('playlistClose').addEventListener('click', () => showSection(home));
+
+/* ========== GALLERY MODAL ========== */
+const modal = document.getElementById('imgModal');
+const modalImg = document.getElementById('modalImg');
+const modalClose = document.getElementById('modalClose');
+
+document.querySelectorAll('.card-thumb img').forEach(img => {
+  img.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+    modalImg.src = img.src;
+  });
+});
+modalClose.addEventListener('click', () => modal.classList.add('hidden'));
+modal.addEventListener('click', e => { if (e.target === modal) modal.classList.add('hidden'); });
+
+/* ========== PLAYLIST PLAYER ========== */
+const audio = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progressBar = document.getElementById('progressBar');
+const progressFill = document.getElementById('progressFill');
+const timeCurrent = document.getElementById('timeCurrent');
+const timeTotal = document.getElementById('timeTotal');
+const nowTitle = document.getElementById('nowTitle');
+const nowArtist = document.getElementById('nowArtist');
+const playlistList = document.getElementById('playlistList');
+
+/* === MÚSICAS === */
+const tracks = [
+  { title: "Daydreamin' (feat. Jill Scott)", artist: "Lupe Fiasco", src: "https://www.dropbox.com/scl/fi/f1jjoo8xvhkp2ugoeenb6/Daydreamin-feat.-Jill-Scott-C0rcii5DCms.mp3?raw=1" },
+  { title: "Fed Up", artist: "UXlJgVmqFXw", src: "https://www.dropbox.com/scl/fi/rl6lu43744alkmoclhw70/Fed-Up-UXlJgVmqFXw.mp3?raw=1" },
+  { title: "Mercury", artist: "GHOSTEMANE", src: "https://www.dropbox.com/scl/fi/rgnqyofwbte4z5bxrxrgm/GHOSTEMANE-Mercury-31j4DIpgY9U.mp3?raw=1" },
+  { title: "Ultimate Summoning Booster", artist: "Unknown Artist", src: "https://www.dropbox.com/scl/fi/ik8iy5aidq01bflc82rxh/Ultimate-Summoning-Booster-ws2CuQ3PGxY.mp3?raw=1" },
+  { title: "Adagio", artist: "Zhasulan Sydykov", src: "https://www.dropbox.com/scl/fi/3wqgcno6xxs23tvl5c700/Adagio-by-Zhasulan-Sydykov-Zhasulan-Sydykov-youtube.mp3?raw=1" },
+  { title: "Voilà", artist: "Barbara Pravi", src: "https://www.dropbox.com/scl/fi/bwufqejqq1xbaiqb64egl/Barbara-Pravi-Voil-Paroles_Lyrics-Creative-Chaos-youtube.mp3?raw=1" },
+  { title: "Il Mondo", artist: "Jimmy Fontana", src: "https://www.dropbox.com/scl/fi/l11mn5m1yb6iqwfzpy08v/Jimmy-Fontana-Il-Mondo-Legendas-IT-PT-BR-Magyart-HD-Videos-youtube.mp3?raw=1" },
+  { title: "My Way (2008 Remastered)", artist: "Frank Sinatra", src: "https://www.dropbox.com/scl/fi/zqii1wyov2umq39q2v36g/My-Way-2008-Remastered-Frank-Sinatra-youtube.mp3?raw=1" }
+];
+
+let currentIndex = -1;
+let isPlaying = false;
+
+/* Render playlist list */
+function renderPlaylist() {
+  playlistList.innerHTML = '';
+  tracks.forEach((track, i) => {
+    const item = document.createElement('div');
+    item.className = 'playlist-item';
+    item.dataset.index = i;
+    item.innerHTML = `
+      <div class="pli-index">${i + 1}</div>
+      <div><div class="pli-title">${track.title}</div><div class="pli-sub">${track.artist}</div></div>
+    `;
+    item.addEventListener('click', () => {
+      loadTrack(i);
+      playTrack();
+    });
+    playlistList.appendChild(item);
+  });
+}
+renderPlaylist();
+
+function updateActive() {
+  document.querySelectorAll('.playlist-item').forEach(e => e.classList.remove('active'));
+  const active = document.querySelector(`.playlist-item[data-index="${currentIndex}"]`);
+  if (active) active.classList.add('active');
+}
+
+function loadTrack(i) {
+  if (i < 0 || i >= tracks.length) return;
+  const track = tracks[i];
+  audio.src = track.src;
+  nowTitle.textContent = track.title;
+  nowArtist.textContent = track.artist;
+  currentIndex = i;
+  updateActive();
+  audio.addEventListener('loadedmetadata', () => {
+    timeTotal.textContent = formatTime(audio.duration);
+  }, { once: true });
+}
+
+function playTrack() {
+  if (!audio.src) {
+    loadTrack(0);
+  }
+  audio.play().then(() => {
+    isPlaying = true;
+    playPauseBtn.textContent = '⏸';
+  }).catch(err => console.log('Erro ao reproduzir:', err));
+}
+
+function pauseTrack() {
+  audio.pause();
+  isPlaying = false;
+  playPauseBtn.textContent = '▶';
+}
+
+playPauseBtn.addEventListener('click', () => {
+  if (isPlaying) pauseTrack();
+  else {
+    if (currentIndex === -1) loadTrack(0);
+    playTrack();
+  }
+});
+
+prevBtn.addEventListener('click', () => {
+  if (currentIndex > 0) loadTrack(currentIndex - 1);
+  else loadTrack(tracks.length - 1);
+  playTrack();
+});
+
+nextBtn.addEventListener('click', () => {
+  if (currentIndex < tracks.length - 1) loadTrack(currentIndex + 1);
+  else loadTrack(0);
+  playTrack();
+});
+
+audio.addEventListener('timeupdate', () => {
+  if (audio.duration) {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressFill.style.width = progress + '%';
+    timeCurrent.textContent = formatTime(audio.currentTime);
+  }
+});
+
+audio.addEventListener('ended', () => {
+  nextBtn.click();
+});
+
+progressBar.addEventListener('click', e => {
+  if (!audio.duration) return;
+  const rect = progressBar.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  audio.currentTime = (x / rect.width) * audio.duration;
+});
+
+function formatTime(sec) {
+  if (!sec || isNaN(sec)) return '0:00';
+  const m = Math.floor(sec / 60);
+  const s = Math.floor(sec % 60);
+  return `${m}:${s < 10 ? '0' + s : s}`;
+}
