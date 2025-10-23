@@ -1,65 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matrix Space</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Matrix Gallery — Xatspace</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- MATRIX BACKGROUND -->
   <canvas id="matrix-canvas"></canvas>
 
-  <!-- MENU -->
-  <nav class="nav-center">
-    <ul>
-      <li><a href="#home" class="active">Home</a></li>
-      <li><a href="#gallery">Gallery</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-  </nav>
+  <header class="topbar">
+    <nav class="nav">
+      <ul>
+        <li><a href="#" id="link-home">Home</a></li>
+        <li><a href="#" id="link-gallery">Gallery</a></li>
+        <li><a href="#" id="link-about">About</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <main>
     <!-- HOME -->
-    <section id="home" class="panel">
+    <section id="home" class="home">
       <div class="home-inner">
         <h1 class="home-title">Hack the world — rewrite the rules.</h1>
-        <p class="home-sub">System online. Welcome, user.</p>
+        <p class="home-sub">SMuhaEmmadTH (1537728773)</p>
       </div>
     </section>
 
     <!-- GALLERY -->
-    <section id="gallery" class="panel hide">
-      <h2>Gallery</h2>
-      <div class="gallery-grid">
-        <img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art1">
-        <img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art2">
-        <img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art3">
-        <img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art4">
-        <img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art5">
-        <img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art6">
+    <section id="gallery" class="gallery hidden">
+      <div class="card"><img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art"></div>
+    </section>
+
+    <!-- Modal Lightbox -->
+    <div id="imgModal" class="hidden modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modalImg">
+    </div>
+
+    <!-- ABOUT -->
+    <section id="about" class="about hidden">
+      <div class="about-inner">
+        <h2>About Me</h2>
+        <p>
+          Hello! I'm a graduate in Information Systems and Technical Support.<br>
+          I can recover accounts and provide various remote digital services.<br>
+          If you're interested in my services or need assistance, feel free to get in touch!
+        </p>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="panel hide">
-      <h2>About Me</h2>
-      <p>
-        Hello! I'm a graduate in Information Systems and Technical Support.
-        I provide account recovery and digital services.
-        If you're interested, feel free to get in touch.
-      </p>
-    </section>
+    <section id="spacer" class="spacer"></section>
   </main>
 
-  <!-- PLAYER -->
-  <div class="player">
-    <button id="play">▶</button>
-    <div class="track-info">
-      <strong>Daydreamin'</strong>
-      <span>Lupe Fiasco — Food & Liquor</span>
+  <!-- 🎵 Player original -->
+  <footer class="player">
+    <div class="player-left">
+      <button id="playBtn" class="play">▶</button>
+      <div class="track-info">
+        <strong id="track-main">Daydreamin' (feat. Jill Scott)</strong>
+        <span class="sub" id="track-sub">Lupe Fiasco — Food & Liquor</span>
+      </div>
     </div>
-    <audio id="music" src="daydreamin.mp3"></audio>
+    <div class="player-right">
+      <div class="visualizer"><span></span><span></span><span></span><span></span></div>
+    </div>
+
+    <audio id="bgMusic"
+           src="https://www.dropbox.com/s/abc123/daydreamin.mp3?raw=1"
+           preload="auto"></audio>
+  </footer>
+
+  <!-- 🎶 PLAYER MATRIX NEON COM PLAYLIST -->
+  <div style="text-align:center; margin-top:30px;">
+    <h3 style="color:#00ff55; text-shadow:0 0 8px #00ff55; font-family:Arial;">
+      🎶 Playlists
+    </h3>
+
+    <audio id="musicPlayer" controls loop
+           style="width:260px;
+                  border:2px solid #00ff55;
+                  border-radius:10px;
+                  box-shadow:0 0 12px #00ff55;
+                  background:rgba(0,0,0,0.6);
+                  outline:none;">
+      <source src="https://www.dropbox.com/s/abc123/daydreamin.mp3?raw=1" type="audio/mpeg">
+      Seu navegador não suporta o player de áudio.
+    </audio>
+
+    <div style="margin-top:12px; font-family:Arial;">
+      <p style="margin:6px;">
+        <a href="https://www.dropbox.com/scl/fi/f1jjoo8xvhkp2ugoeenb6/Daydreamin-feat.-Jill-Scott-C0rcii5DCms.mp3?rlkey=y2abzaxc9h6tzdaluqalx7he2&st=bsh6jwlo&dl=0" target="_self" style="color:#00ff55;">🎧 Daydreamin' (feat. Jill Scott)</a>
+      </p>
+      <p style="margin:6px;">
+        <a href="https://www.dropbox.com/scl/fi/ik8iy5aidq01bflc82rxh/Ultimate-Summoning-Booster-ws2CuQ3PGxY.mp3?rlkey=7uxgb95x95i2bjs8qwl8ljk7x&st=2nj5pr6l&dl=0" target="_self" style="color:#00ff55;">Ultimate Summmoning Booster</a>
+      </p>
+      <p style="margin:6px;">
+        <a href="https://www.dropbox.com/scl/fi/rgnqyofwbte4z5bxrxrgm/GHOSTEMANE-Mercury-31j4DIpgY9U.mp3?rlkey=su0ehuwriv2slzwsfua1vyxy4&st=79b3s5mt&dl=0" target="_self" style="color:#00ff55;">🌌 GHOSTENAME- Mercury</a>
+      </p>
+      <p style="margin:6px;">
+        <a href="https://www.dropbox.com/scl/fi/rl6lu43744alkmoclhw70/Fed-Up-UXlJgVmqFXw.mp3?rlkey=ezp4r6s2wgtux8uvin9fkoufu&st=4emhf3cu&dl=0" target="_self" style="color:#00ff55;">🔥 GHOSTENAME - Fep Up</a>
+      </p>
+    </div>
   </div>
 
   <script src="script.js"></script>
