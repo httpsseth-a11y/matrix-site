@@ -78,14 +78,14 @@ const playlistList = document.getElementById('playlistList');
 
 /* === MÚSICAS (Google Drive links) === */
 const tracks = [
-  { title: "Daydreamin' (feat. Jill Scott)", artist: "Lupe Fiasco", src: "https://drive.google.com/uc?export=download&id=1k15BmTdxfsJMoFEX2gPv0o0l182MIbZF" },
-  { title: "Fed Up", artist: "UXlJgVmqFXw", src: "https://drive.google.com/uc?export=download&id=15om_jcelushHWcwpGpeTlk62kml_wyAe" },
-  { title: "Mercury", artist: "GHOSTEMANE", src: "https://drive.google.com/uc?export=download&id=1RkRnIo1k4xxdAuZKsP8GHvepHyY9mwHl" },
-  { title: "Ultimate Summoning Booster", artist: "Unknown Artist", src: "https://drive.google.com/uc?export=download&id=11uF-61lLV-J8dds22v8PBsKKxlkuZ4sR" },
-  { title: "Adagio", artist: "Zhasulan Sydykov", src: "https://drive.google.com/uc?export=download&id=1r74dJQdoueeZL6TFOKiGpwouGYNlXVZg" },
-  { title: "Voilà", artist: "Barbara Pravi", src: "https://drive.google.com/uc?export=download&id=1Qe0v_f4zf_9qK1baMoYCgArqQioKXLcr" },
-  { title: "Il Mondo", artist: "Jimmy Fontana", src: "https://drive.google.com/uc?export=download&id=1HdipaqFKTvf1Ivq6e1XyMdwtytv9wX4g" },
-  { title: "My Way (2008 Remastered)", artist: "Frank Sinatra", src: "https://drive.google.com/uc?export=download&id=1uD4I7PF2JMcTt9Pp0Pdq91EQSojhTM4B" }
+  { title: "Daydreamin' (feat. Jill Scott)", artist: "Lupe Fiasco", src: "musicas/daydreamin.mp3" },
+  { title: "Fed Up", artist: "UXlJgVmqFXw", src: "musicas/fedup.mp3" },
+  { title: "Mercury", artist: "GHOSTEMANE", src: "musicas/mercury.mp3" },
+  { title: "Ultimate Summoning Booster", artist: "Unknown Artist", src: "musicas/ultimate.mp3" },
+  { title: "Adagio", artist: "Zhasulan Sydykov", src: "musicas/adagio.mp3" },
+  { title: "Voilà", artist: "Barbara Pravi", src: "musicas/voila.mp3" },
+  { title: "Il Mondo", artist: "Jimmy Fontana", src: "musicas/ilmondo.mp3" },
+  { title: "My Way (2008 Remastered)", artist: "Frank Sinatra", src: "musicas/myway.mp3" }
 ];
 
 let currentIndex = -1;
@@ -187,3 +187,64 @@ function formatTime(sec) {
   const s = Math.floor(sec % 60);
   return `${m}:${s < 10 ? '0' + s : s}`;
 }
+// ======== CONTROLE DE VOLUME ========
+const volumeSlider = document.getElementById("volumeSlider");
+audio.volume = volumeSlider.value;
+
+// Atualiza o volume conforme o slider é movido
+volumeSlider.addEventListener("input", () => {
+  audio.volume = volumeSlider.value;
+});
+// ======== ANIMAÇÃO DE VOLUME (FADE) ========
+const muteBtn = document.getElementById("muteBtn");
+const muteIcon = document.getElementById("muteIcon");
+let lastVolume = 1;
+let fadeInterval;
+
+// Função para animar o fade
+function fadeVolume(targetVolume, duration = 600) {
+  clearInterval(fadeInterval);
+  const steps = 30;
+  const stepTime = duration / steps;
+  const startVolume = audio.volume;
+  const volumeStep = (targetVolume - startVolume) / steps;
+
+  let currentStep = 0;
+  fadeInterval = setInterval(() => {
+    currentStep++;
+    audio.volume = Math.max(0, Math.min(1, startVolume + volumeStep * currentStep));
+    volumeSlider.value = audio.volume;
+
+    if (currentStep >= steps) {
+      clearInterval(fadeInterval);
+      audio.volume = targetVolume;
+      volumeSlider.value = targetVolume;
+    }
+  }, stepTime);
+}
+
+// Alternar mute com animação
+muteBtn.addEventListener("click", () => {
+  if (audio.muted || audio.volume === 0) {
+    // Reativar som (fade-in)
+    muteIcon.classList.remove("muted");
+    audio.muted = false;
+    fadeVolume(lastVolume || 1, 800);
+  } else {
+    // Silenciar com fade-out
+    lastVolume = audio.volume;
+    muteIcon.classList.add("muted");
+    fadeVolume(0, 800);
+    setTimeout(() => { audio.muted = true; }, 800);
+  }
+});
+
+// Atualizar o ícone conforme o volume
+volumeSlider.addEventListener("input", () => {
+  audio.volume = volumeSlider.value;
+  audio.muted = audio.volume === 0;
+  muteIcon.classList.toggle("muted", audio.muted);
+});
+
+
+
