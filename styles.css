@@ -27,11 +27,22 @@ main{position:relative;z-index:2;padding:96px 20px 160px}
 .card img{width:100%;height:220px;object-fit:cover;border-radius:10px;cursor:pointer;transition:transform 0.3s ease,box-shadow 0.3s ease;border:2px solid rgba(0,255,100,0.8);box-shadow:0 0 10px rgba(0,255,100,0.6),0 0 20px rgba(0,255,100,0.3)}
 .card img:hover{transform:scale(1.04);border:2px solid rgba(0,255,100,1);box-shadow:0 0 15px rgba(0,255,100,0.9),0 0 30px rgba(0,255,100,0.5)}
 
+/* MODAL */
+.modal{display:flex;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(4px);z-index:20}
+.modal.hidden{display:none}
+.modal-content{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 0 40px rgba(0,255,100,0.5)}
+.close{position:absolute;top:20px;right:30px;font-size:36px;color:#b8f08a;cursor:pointer;user-select:none}
+
 /* ABOUT */
 .about{display:flex;align-items:center;justify-content:center;min-height:400px;text-align:center}
 .about-inner{background:rgba(0,0,0,0.45);padding:36px;border-radius:12px;border:1px solid rgba(40,100,40,0.18);max-width:600px}
 .about h2{color:#dfffdc;margin-bottom:12px;font-size:26px;font-weight:700}
 .about p{color:#8fdca0;font-size:15px;line-height:1.6}
+
+/* BACK BUTTON */
+.back-btn{text-align:center;margin-top:30px}
+.back-btn a{display:inline-block;padding:10px 24px;color:#00ff88;border:1px solid rgba(0,255,100,0.4);border-radius:10px;text-decoration:none;font-weight:600;background:rgba(0,255,100,0.1);box-shadow:0 0 8px rgba(0,255,100,0.3);transition:all 0.3s ease}
+.back-btn a:hover{background:rgba(0,255,100,0.25);box-shadow:0 0 15px rgba(0,255,100,0.6)}
 
 /* PLAYER */
 .player{position:fixed;left:12px;right:12px;bottom:12px;background:rgba(0,0,0,0.6);border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;z-index:6;border:1px solid rgba(40,100,40,0.2)}
@@ -40,18 +51,7 @@ main{position:relative;z-index:2;padding:96px 20px 160px}
 .track-info{margin-left:12px}
 .track-info .sub{display:block;color:#8fdca0;font-size:12px}
 
-/* LIGHTBOX */
-.lightbox{display:flex;align-items:center;justify-content:center;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:20;backdrop-filter:blur(3px)}
-.lightbox img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 0 40px rgba(0,255,100,0.5)}
-.close-lightbox{position:absolute;top:20px;right:30px;font-size:36px;color:#b8f08a;cursor:pointer;transition:0.3s}
-.close-lightbox:hover{color:#00ff55}
-
-/* Back Button */
-.back-btn{text-align:center;margin-top:30px}
-.back-btn a{display:inline-block;padding:10px 24px;color:#00ff88;border:1px solid rgba(0,255,100,0.4);border-radius:10px;text-decoration:none;font-weight:600;background:rgba(0,255,100,0.1);box-shadow:0 0 8px rgba(0,255,100,0.3);transition:all 0.3s ease}
-.back-btn a:hover{background:rgba(0,255,100,0.25);box-shadow:0 0 15px rgba(0,255,100,0.6)}
-
-/* Hidden sections */
+/* Hidden */
 .hidden{display:none !important}
 
 /* Responsive */
