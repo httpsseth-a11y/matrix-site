@@ -1,258 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matrix Space</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-body {
-  margin: 0;
-  height: 100vh;
-  background: black;
-  color: #00ff9d;
-  font-family: 'Share Tech Mono', monospace;
-  overflow: hidden;
-}
-
-/* Fundo Matrix */
-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-/* Caixa central com frase */
-.center-box {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 40px 60px;
-  border-radius: 10px;
-  box-shadow: 0 0 25px #00ff9d;
-}
-
-h1 {
-  font-size: 28px;
-  text-shadow: 0 0 15px #00ff9d;
-  margin-bottom: 10px;
-}
-
-p {
-  font-size: 14px;
-  margin-top: 0;
-  color: #00ffaa;
-}
-
-/* Menu */
-nav {
-  margin-top: 15px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #00ffaa;
-  margin: 0 10px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-nav a:hover {
-  color: #fff;
-  text-shadow: 0 0 10px #00ff9d;
-}
-
-/* Galeria */
-#gallery {
-  display: none;
-  text-align: center;
-  padding: 60px 0;
-}
-
-.gallery-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  padding: 40px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.gallery-container img {
-  width: 100%;
-  border-radius: 10px;
-  border: 2px solid #00ff9d;
-  box-shadow: 0 0 20px #00ff9d;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.gallery-container img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px #00ffaa, 0 0 50px #00ff9d;
-}
-
-/* Lightbox */
-#lightbox {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.9);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-#lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
-  box-shadow: 0 0 40px #00ff9d;
-}
-
-#lightbox span {
-  position: absolute;
-  bottom: 20px;
-  font-size: 20px;
-  color: #00ffaa;
-  cursor: pointer;
-  text-shadow: 0 0 10px #00ff9d;
-}
-
-/* About */
-#about {
-  display: none;
-  text-align: center;
-  padding: 80px;
-  color: #00ffaa;
-}
-
-#about h2 {
-  font-size: 24px;
-  text-shadow: 0 0 15px #00ff9d;
-}
-
-#about p {
-  font-size: 14px;
-  max-width: 600px;
-  margin: 20px auto;
-  line-height: 1.6;
-}
-
-/* Player */
-.player {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  border-radius: 15px;
-  padding: 10px 20px;
-  box-shadow: 0 0 20px #00ff9d;
-  font-size: 12px;
-  color: #00ffaa;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xatspace Matrix</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <canvas id="matrix"></canvas>
 
-<canvas id="matrix"></canvas>
+  <div class="content">
+    <h1 class="username">SETH</h1>
 
-<div class="center-box" id="home">
-  <h1>Hack the world — rewrite the rules.</h1>
-  <p>Welcome to the system</p>
-  <nav>
-    <a href="#" onclick="showPage('home')">HOME</a>
-    <a href="#" onclick="showPage('gallery')">GALLERY</a>
-    <a href="#" onclick="showPage('about')">ABOUT</a>
-  </nav>
-</div>
+    <nav class="menu">
+      <button data-section="home">Home</button>
+      <button data-section="gallery">Gallery</button>
+      <button data-section="about">Friends</button>
+    </nav>
 
-<section id="gallery">
-  <div class="gallery-container">
-    <img src="https://i.imgur.com/pvVzsvQ.png">
-    <img src="https://i.imgur.com/YXEX6bJ.jpeg">
-    <img src="https://i.imgur.com/fOaMhlK.jpeg">
-    <img src="https://i.imgur.com/RJk0oDG.jpeg">
-    <img src="https://i.imgur.com/ZgfbrYO.jpeg">
-    <img src="https://i.imgur.com/2fVLBze.jpeg">
+    <section id="home" class="section active">
+      <div class="box">
+        <p>Welcome to my world — The Matrix within.</p>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery hidden">
+      <div class="card"><img src="https://i.ibb.co/HDQtYv68/baixados.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/HTqKZZNP/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/RTMQ9HSM/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/cSFPNdr2/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/4ZXkbjff/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/35Ccgxnb/image.png" alt="art"></div>
+      <div class="card"><img src="https://i.ibb.co/Q3N12PpW/image.png" alt="art"></div>
+    </section>
+
+    <section id="about" class="section hidden">
+      <div class="box">
+        <h2>Friends</h2>
+        <ul class="friends">
+          <li><img src="https://i.ibb.co/p2PMhMZ/friend1.jpg" alt=""> <span>@NeoX</span></li>
+          <li><img src="https://i.ibb.co/ZSMp3yc/friend2.jpg" alt=""> <span>@TrinityX</span></li>
+          <li><img src="https://i.ibb.co/G0BzK3S/friend3.jpg" alt=""> <span>@MorpheusX</span></li>
+        </ul>
+      </div>
+    </section>
   </div>
-</section>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    I’m a Systems Information graduate and IT Support professional.  
-    If you’re interested in account recovery or other services, feel free to contact me.  
-  </p>
-</section>
+  <div id="lightbox" class="hidden">
+    <img id="lightbox-img" src="" alt="expanded">
+    <button id="close-lightbox">X</button>
+  </div>
 
-<div id="lightbox">
-  <img src="">
-  <span onclick="closeLightbox()">✕</span>
-</div>
-
-<div class="player">
-  ▶ Daydreamin' — Lupe Fiasco ft. Jill Scott
-</div>
-
-<script>
-// Efeito Matrix
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
-
-const letters = '01あかさたなはまやらわがざだばぱABCDEFGHIJKLMNÑOPQRSTUVWXYZ'.split('');
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
-
-function draw() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#00ff9d';
-  ctx.font = fontSize + 'px monospace';
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-    drops[i]++;
-  }
-}
-setInterval(draw, 33);
-
-// Navegação
-function showPage(page) {
-  document.getElementById('home').style.display = 'none';
-  document.getElementById('gallery').style.display = 'none';
-  document.getElementById('about').style.display = 'none';
-  document.getElementById(page).style.display = 'block';
-}
-
-// Lightbox
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = lightbox.querySelector('img');
-
-document.querySelectorAll('.gallery-container img').forEach(img => {
-  img.addEventListener('click', () => {
-    lightboxImg.src = img.src;
-    lightbox.style.display = 'flex';
-  });
-});
-
-function closeLightbox() {
-  lightbox.style.display = 'none';
-}
-
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
