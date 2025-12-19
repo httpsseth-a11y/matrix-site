@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hack the world — rewrite the rules.</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="matrix-canvas"></canvas>
+
+  <main>
+    <!-- HOME -->
+    <section id="home" class="card">
+      <h1 class="title">Hack the world — rewrite the rules.</h1>
+      <p class="subtitle">Know thyself, know the code.</p>
+
+      <nav class="menu">
+        <a href="#" id="link-home">Home</a>
+        <a href="#" id="link-gallery">Gallery</a>
+        <a href="#" id="link-about">About</a>
+        <a href="#" id="link-playlists">Playlists</a>
+      </nav>
+    </section>
+
+    <div class="contact-box">
+      <a class="contact-link" href="https://httpsseth-a11y.github.io/xatspaceseth/" target="_blank" rel="noopener noreferrer">Contáctame para más información</a>
+    </div>
+
+    <!-- GALLERY -->
+    <section id="gallery" class="card hidden">
+      <div class="gallery-scroll">
+        <div class="card-thumb"><img src="https://i.ibb.co/HDQtYv68/baixados.png"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/RJJZ4bZ/444468819-920361140101154-5099881801487526969-n.jpg"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/HTqKZZNP/image.png"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/RTMQ9HSM/image.png"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/cSFPNdr2/image.png"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/4ZXkbjff/image.png"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/35Ccgxnb/image.png"></div>
+        <div class="card-thumb"><img src="https://i.ibb.co/Q3N12PpW/image.png"></div>
+      </div>
+      <div class="section-close">
+        <button id="galleryClose" class="close-btn">✕ Close</button>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="card hidden">
+      <div class="about-inner">
+        <h2>About Me</h2>
+        <p>
+          Hello! I'm a graduate in Information Systems and Technical Support.<br>
+          I can recover accounts and provide various remote digital services.<br>
+          If you're interested in my services or need assistance, feel free to get in touch!
+        </p>
+      </div>
+      <div class="section-close">
+        <button id="aboutClose" class="close-btn">✕ Close</button>
+      </div>
+    </section>
+
+    <!-- PLAYLISTS -->
+    <section id="playlists" class="card hidden">
+      <div class="player-wrap">
+        <div class="player-ui">
+          <div class="controls">
+            <button class="btn" id="prevBtn">⏮</button>
+            <button class="btn" id="playPauseBtn">▶</button>
+            <button class="btn" id="nextBtn">⏭</button>
+          </div>
+        
+          <div class="track-info">
+            <div class="track-title" id="nowTitle">—</div>
+            <div class="track-artist" id="nowArtist">—</div>
+            <div class="progress" id="progressBar"><div class="bar" id="progressFill"></div></div>
+            <div class="time-row"><div id="timeCurrent">0:00</div><div id="timeTotal">0:00</div></div>
+          </div>
+          <!-- Controle de volume -->
+          <div class="volume-container">
+            <button id="muteBtn" class="volume-label">
+              <span id="muteIcon"></span>
+            </button>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+          </div>
+
+        </div>
+        <div class="playlist-list" id="playlistList"></div>
+      </div>
+      <div class="section-close">
+        <button id="playlistClose" class="close-btn">✕</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div id="imgModal" class="modal hidden">
+    <img id="modalImg">
+    <div class="close-btm" id="modalClose">✕</div>
+  </div>
+
+  <audio id="audioPlayer" preload="metadata"></audio>
+  <script src="script.js"></script>
+</body>
+</html>
